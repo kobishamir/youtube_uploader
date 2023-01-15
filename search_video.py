@@ -51,9 +51,10 @@ def youtube_search(options):
             playlists.append('%s (%s)' % (search_result['snippet']['title'],
                                           search_result['id']['playlistId']))
 
-    print('Videos:\n', '\n'.join(videos), '\n')
-    print('Channels:\n', '\n'.join(channels), '\n')
-    print('Playlists:\n', '\n'.join(playlists), '\n')
+    # print('Videos:\n', '\n'.join(videos), '\n')
+    return(videos)
+    # print('Channels:\n', '\n'.join(channels), '\n')
+    # print('Playlists:\n', '\n'.join(playlists), '\n')
 
 
 if __name__ == '__main__':
