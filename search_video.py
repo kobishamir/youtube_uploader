@@ -8,15 +8,19 @@
 #       to find the correct place to provide that key..
 
 import argparse
+import os
 
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+from dotenv import load_dotenv
 
+load_dotenv()
 # Set DEVELOPER_KEY to the API key value from the APIs & auth > Registered apps
 # tab of
 #   https://cloud.google.com/console
 # Please ensure that you have enabled the YouTube Data API for your project.
-DEVELOPER_KEY = 'AIzaSyDZZk8M6ihFpPnjz4SwdnIzKTdaXLDMDn0'
+
+DEVELOPER_KEY = os.getenv('DEVELOPER_KEY')
 YOUTUBE_API_SERVICE_NAME = 'youtube'
 YOUTUBE_API_VERSION = 'v3'
 
