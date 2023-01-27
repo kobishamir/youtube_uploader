@@ -5,9 +5,11 @@ import os
 import argparse
 import search_video
 import playlist_updates
+import playlist_serach
 import subprocess
 
-# TODO: cheak if Playlist is exists - if it does than pass the createPlaylist method
+# TODO: make application authorized only once
+
 
 path = "E:\המוזיקה שלי"
 # youtube = playlist_updates.get_authenticated_service()
@@ -24,7 +26,9 @@ def createPlaylist(path):
                                 default='This Playlist based on the music folder at your local PC',
                                 help='The description of the new playlist.')
             args = parser.parse_args()
-            # playlist_updates.add_playlist(youtube, args)
+            if dirname not in playlist_serach.main():
+                # playlist_updates.add_playlist(youtube, args)
+                print('''playlist "created"''')
         break
 
 def find_files_and_subfolders(path):
