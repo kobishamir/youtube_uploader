@@ -1,18 +1,22 @@
 
 # This code search music files in a given directory, including sub-directories
-
+import google_auth_oauthlib.flow
 import os
 import argparse
 import search_video
 import playlist_updates
 import playlist_serach
-import subprocess
 
-# TODO: make application authorized only once
+scopes = ["https://www.googleapis.com/auth/youtube.readonly"]
+client_secrets_file = "client_secret.json"
 
+# TODO: make application authorized only once - half way there
+flow = google_auth_oauthlib.flow.InstalledAppFlow.from_client_secrets_file(
+        client_secrets_file, scopes)
+credentials = flow.run_console()
 
 path = "E:\המוזיקה שלי"
-# youtube = playlist_updates.get_authenticated_service()
+youtube = playlist_updates.get_authenticated_service()
 
 def createPlaylist(path):
 
@@ -26,9 +30,9 @@ def createPlaylist(path):
                                 default='This Playlist based on the music folder at your local PC',
                                 help='The description of the new playlist.')
             args = parser.parse_args()
-            if dirname not in playlist_serach.main():
-                # playlist_updates.add_playlist(youtube, args)
-                print('''playlist "created"''')
+            if dirname not in playlist_serach.main(credentials):
+                playlist_updates.add_playlist(youtube, args)
+                print('''playlist "%s" created''' % dirname)
         break
 
 def find_files_and_subfolders(path):
